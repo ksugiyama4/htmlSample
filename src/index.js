@@ -12,5 +12,5 @@ const buildDate = process.env.APP_BUILD_DATE || new Date().toISOString()
 
 app.get('/', (req, res) => res.send(myLib.helloWorld()))
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000, () => console.log('Example App listening on port 3000!'))
 
