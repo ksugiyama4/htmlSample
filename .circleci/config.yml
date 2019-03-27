@@ -26,7 +26,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
     environment:
-      - PROJECT_NAME: "gcp20190326"
+      - PROJECT_NAME: "my-app"
       - GOOGLE_PROJECT_ID: "gcp20190326"
       - GOOGLE_COMPUTE_ZONE: "asia-northeast1-a"
       - GOOGLE_CLUSTER_NAME: "cluster-1"
