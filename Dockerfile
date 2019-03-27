@@ -16,6 +16,11 @@ COPY . .
 
 # Run any other build steps such as `npm run build`
 
+ARG COMMIT_REF
+ARG BUILD_DATE
+ENV APP_COMMIT_REF=${COMMIT_REF} \
+    APP_BUILD_DATE=${BUILD_DATE}
+
 EXPOSE 3000
 
 CMD [ "npm", "start" ]

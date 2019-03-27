@@ -7,6 +7,8 @@ const app = express()
 */
 const myLib = require('./lib')
 
+const commitRef = process.env.APP_COMMIT_REF || 'N/A'
+const buildDate = process.env.APP_BUILD_DATE || new Date().toISOString()
 
 app.get('/', (req, res) => res.send(myLib.helloWorld()))
 
