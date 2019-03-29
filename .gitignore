@@ -4,7 +4,7 @@
 .vscode
 
 # dependencies
-/node_module
+/node_modules
 
 # misc
 .DS_Store
