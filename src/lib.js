@@ -1,4 +1,4 @@
-const helloWorld = () => 'Hello World!!!'
+const helloWorld = () => 'Hello NodeJS World!!!'
 
 module.exports = {
     helloWorld
