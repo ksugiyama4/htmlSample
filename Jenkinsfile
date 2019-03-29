@@ -3,6 +3,7 @@ pipeline {
     registry = "ksugiyama4/docker-test"
     registryCredential = 'dockerhub'
     dockerImage = ''
+    dockerLatestImage = ''
   }
   agent any
   tools {nodejs "node" }
@@ -25,7 +26,8 @@ pipeline {
     stage('Building Docker') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          //dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerLatestImage = docker.build registry + ":latest"
         }
       }
     }
@@ -40,7 +42,8 @@ pipeline {
     }
     stage('Remove Unused Docker') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        //sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $registry:latest"
       }
     }
   }
