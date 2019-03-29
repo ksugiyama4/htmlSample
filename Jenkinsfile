@@ -4,6 +4,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     dockerLatestImage = ''
+    TAG='latest'
   }
   agent any
   tools {nodejs "node" }
@@ -26,8 +27,7 @@ pipeline {
     stage('Building Docker') {
       steps{
         script {
-          dockerImage = docker.build registry
-          //dockerLatestImage = docker.build registry + ":latest"
+          dockerLatestImage = docker.build registry + ":$TAG"
         }
       }
     }
@@ -43,7 +43,7 @@ pipeline {
     stage('Remove Unused Docker') {
       steps{
         sh "docker rmi $registry"
-        //sh "docker rmi $registry:latest"
+        //sh "docker rmi $registry:$TAG"
       }
     }
   }
