@@ -42,8 +42,8 @@ pipeline {
     }
     stage('Remove Unused Docker') {
       steps{
-        sh "docker rmi $registry"
-        //sh "docker rmi $registry:$TAG"
+        //sh "docker rmi $registry"
+        sh "docker rmi $registry:$TAG"
       }
     }
   }
