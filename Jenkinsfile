@@ -1,4 +1,4 @@
-node {
+pipeline {
   environment {
     registry = "ksugiyama4/docker-test"
     registryCredential = 'dockerhub'
