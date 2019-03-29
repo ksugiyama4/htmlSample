@@ -12,12 +12,12 @@ pipeline {
         git 'https://github.com/ksugiyama4/htmlSample'
       }
     }
-    stage('Building Image') {
+    stage('Building NodeJS Image') {
        steps {
          sh 'npm install'
        }
     }
-    stage('Testing Image') {
+    stage('Testing NodeJS Image') {
       steps {
         sh 'npm test'
       }
