@@ -12,12 +12,12 @@ node {
         git 'https://github.com/ksugiyama4/htmlSample'
       }
     }
-    stage('Build') {
+    stage('Building') {
        steps {
          sh 'npm install'
        }
     }
-    stage('Test') {
+    stage('Testing') {
       steps {
         sh 'npm test'
       }
@@ -29,7 +29,7 @@ node {
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Deploying Image') {
       steps{
          script {
             docker.withRegistry( '', registryCredential ) {
