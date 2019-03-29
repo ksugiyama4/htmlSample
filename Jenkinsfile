@@ -12,24 +12,24 @@ pipeline {
         git 'https://github.com/ksugiyama4/htmlSample'
       }
     }
-    stage('Building') {
+    stage('Building Image') {
        steps {
          sh 'npm install'
        }
     }
-    stage('Testing') {
+    stage('Testing Image') {
       steps {
         sh 'npm test'
       }
     }
-    stage('Building Image') {
+    stage('Building Docker') {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
-    stage('Deploying Image') {
+    stage('Deploying Docker') {
       steps{
          script {
             docker.withRegistry( '', registryCredential ) {
