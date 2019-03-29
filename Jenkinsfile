@@ -1,35 +1,36 @@
-podTemplate(
-  label: 'skaffold',
-  containers: [
-    containerTemplate(name: 'skaffold-insider', image: 'hhayakaw/skaffold-insider:v1.0.0', ttyEnabled: true, command: 'cat')
-  ],
-  volumes: [
-    hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')
-  ]
-) {
-  node('skaffold') {
-    withCredentials([
-      usernamePassword(credentialsId: 'docker_id', usernameVariable: 'DOCKER_ID_USR', passwordVariable: 'DOCKER_ID_PSW')
-    ]) {
-      stage('Info') {
-        container('skaffold-insider') {
-          sh """
-            uname -a
-            whoami
-            pwd
-            ls -al
-          """
+node {
+    
+	
+
+    env.AWS_ECR_LOGIN=true
+    def newApp
+    def registry = 'gustavoapolinario/microservices-node-todo-frontend'
+    def registryCredential = 'dockerhub'
+	
+	stage('Git') {
+		git 'https://github.com/gustavoapolinario/node-todo-frontend'
+	}
+	stage('Build') {
+		sh 'npm install'
+	}
+	stage('Test') {
+		sh 'npm test'
+	}
+	stage('Building image') {
+        docker.withRegistry( 'https://' + registry, registryCredential ) {
+		    def buildName = registry + ":$BUILD_NUMBER"
+			newApp = docker.build buildName
+			newApp.push()
         }
-      }
-      stage('Test skaffold') {
-        git 'https://github.com/ksugiyama4/htmlSample.git'
-        container('skaffold-insider') {
-          sh """
-            docker login --username=$DOCKER_ID_USR --password=$DOCKER_ID_PSW
-            skaffold run -p release
-          """
+	}
+	stage('Registring image') {
+        docker.withRegistry( 'https://' + registry, registryCredential ) {
+    		newApp.push 'latest2'
         }
-      }
+	}
+    stage('Removing image') {
+        sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $registry:latest"
     }
-  }
+    
 }
