@@ -22,7 +22,7 @@ pipeline {
         sh 'npm test'
       }
     }
-    stage('Building image') {
+    stage('Building Image') {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
