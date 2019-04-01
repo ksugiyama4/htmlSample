@@ -20,10 +20,11 @@ connection.connect(function(err) {
     }
     console.log('connected as id ' + connection.threadId);
 
-  connection.query('SELECT * FROM　`POKEMON_TABLE` WHERE `pok_index` = 1', function (error, results, fields) {
+  connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_index` = 1', function (error, results, fields) {
 
 
     app.get('/', (req, res) => res.send(myLib.helloWorld() + fields))
+    console.log('connected as id ' + fields);
     
     app.listen(3000, () => console.log('Example app listening on port 3000!'))
     
