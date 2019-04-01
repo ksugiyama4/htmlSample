@@ -24,7 +24,8 @@ connection.connect(function(err) {
 
 
     app.get('/', (req, res) => res.send(myLib.helloWorld() + fields))
-    console.log('connected as id ' + fields);
+    console.log('results is ' + results);
+    console.log('fields is ' + fields);
     
     app.listen(3000, () => console.log('Example app listening on port 3000!'))
     
