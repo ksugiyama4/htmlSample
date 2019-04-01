@@ -11,7 +11,8 @@ var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : process.env.PMA_HOST,
   user     : 'root',
-  password : '1Berzerksoul'
+  password : '1Berzerksoul',
+  database : 'test_db'
 });
 connection.connect(function(err) {
     if (err) {
@@ -22,9 +23,6 @@ connection.connect(function(err) {
     
   })
   connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_index` = 1', function (error, results, fields) {
-    app.get('/', (req, res) => res.send(myLib.helloWorld() + fields))
-    console.log('results is ' + results);
-    console.log('fields is ' + fields);
-    
-    app.listen(3000, () => console.log('Example app listening on port 3000!'))
+    app.get('/', (req, res) => res.send(myLib.helloWorld() + results[0].pok_name))
 });
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
