@@ -8,7 +8,7 @@ const app = express()
 const myLib = require('./lib')
 
 
-app.get('/', (req, res) => res.send(myLib.helloWorld() + "Test"))
+app.get('/', (req, res) => res.send(myLib.helloWorld() + process.env))
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
