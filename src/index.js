@@ -25,4 +25,10 @@ connection.connect(function(err) {
   connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_index` = 1', function (error, results, fields) {
     app.get('/', (req, res) => res.send(myLib.helloWorld() + results[0].pok_name))
 });
+app.get("/api/pokemon/status/:name", function(req, res, next){
+    console.log(req.params.name);
+    connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_name` = "'+ req.params.name +'"', function (error, results, fields) {
+            res.send(results[0].pok_index)
+    });
+});
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
