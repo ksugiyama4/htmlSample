@@ -13,16 +13,20 @@ var connection = mysql.createConnection({
   user     : 'root',
   password : '1Berzerksoul'
 });
-if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
+connection.connect(function(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+    console.log('connected as id ' + connection.threadId);
+
   connection.query('SELECT * FROM　`POKEMON_TABLE` WHERE `pok_index` = 1', function (error, results, fields) {
 
 
-app.get('/', (req, res) => res.send(myLib.helloWorld() + fields))
-
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
-
-
+    app.get('/', (req, res) => res.send(myLib.helloWorld() + fields))
+    
+    app.listen(3000, () => console.log('Example app listening on port 3000!'))
+    
+    
   })
+});
