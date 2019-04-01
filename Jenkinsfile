@@ -19,6 +19,11 @@ pipeline {
          sh 'npm install'
        }
     }
+    stage('Installing mysql Package') {
+       steps {
+         sh 'npm install mysql'
+       }
+    }
     stage('Testing NodeJS Image') {
       steps {
         sh 'npm test'
