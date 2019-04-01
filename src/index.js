@@ -19,16 +19,12 @@ connection.connect(function(err) {
       return;
     }
     console.log('connected as id ' + connection.threadId);
-
+    
+  })
   connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_index` = 1', function (error, results, fields) {
-
-
     app.get('/', (req, res) => res.send(myLib.helloWorld() + fields))
     console.log('results is ' + results);
     console.log('fields is ' + fields);
     
     app.listen(3000, () => console.log('Example app listening on port 3000!'))
-    
-    
-  })
 });
