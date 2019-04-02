@@ -28,6 +28,10 @@ connection.connect(function(err) {
 app.get("/api/pokemon/status/:name/:item", function(req, res, next){
     console.log(req.params.name);
     connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_name` = "'+ req.params.name +'"', function (error, results, fields) {
+        if (error) {
+            console.error('error getting: ' + err.stack);
+            return;
+          }
         switch(req.params.item) {
             case 'h':
             res.send(results[0].pok_h)
