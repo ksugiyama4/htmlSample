@@ -25,14 +25,13 @@ connection.connect(function(err) {
   connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_index` = 1', function (error, results, fields) {
     app.get('/', (req, res) => res.send(myLib.helloWorld() + results[0].pok_name))
 });
-app.get("/api/pokemon/status/:name/:item", function(req, res, next){
+app.get("/api/pokemon/status/:name", function(req, res, next){
     console.log(req.params.name);
     connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_name` = "'+ req.params.name +'"', function (error, results, fields) {
         if (error) {
             console.error('error getting: ' + error.stack);
             res.json({
-                message:"Error",
-                value:"403"
+                message:"403"
             })
             return;
           }
@@ -40,49 +39,19 @@ app.get("/api/pokemon/status/:name/:item", function(req, res, next){
           {
             console.error('Invalid Name:' + req.params.name);
             res.json({
-                message:"Error",
-                value:"404"
+                message:"404"
             })
             return;
           }
-        switch(req.params.item) {
-            case 'h':
             res.json({
-                message:"Success",
-                value:results[0].pok_h
+                message:"200",
+                pok_h:results[0].pok_h,
+                pok_a:results[0].pok_a,
+                pok_b:results[0].pok_b,
+                pok_c:results[0].pok_c,
+                pok_d:results[0].pok_d,
+                pok_s:results[0].pok_s
             })
-                break;
-            case 'a':
-            res.json({
-                message:"Success",
-                value:results[0].pok_a
-            })
-                break;
-            case 'b':
-            res.json({
-                message:"Success",
-                value:results[0].pok_b
-            })
-                break;
-            case 'c':
-            res.json({
-                message:"Success",
-                value:results[0].pok_c
-            })
-                break;
-            case 'd':
-            res.json({
-                message:"Success",
-                value:results[0].pok_d
-            })
-                break;
-            case 's':
-            res.json({
-                message:"Success",
-                value:results[0].pok_s
-            })
-                break;
-        }
     });
 });
 app.listen(80, () => console.log('Example app listening on port 80!'))
