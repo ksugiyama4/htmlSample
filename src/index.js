@@ -30,31 +30,57 @@ app.get("/api/pokemon/status/:name/:item", function(req, res, next){
     connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_name` = "'+ req.params.name +'"', function (error, results, fields) {
         if (error) {
             console.error('error getting: ' + error.stack);
+            res.json({
+                message:"Error",
+                value:"403"
+            })
             return;
           }
           if(!results[0])
           {
             console.error('Invalid Name:' + req.params.name);
+            res.json({
+                message:"Error",
+                value:"404"
+            })
             return;
           }
         switch(req.params.item) {
             case 'h':
-            res.send(results[0].pok_h)
+            res.json({
+                message:"Success",
+                value:results[0].pok_h
+            })
                 break;
             case 'a':
-            res.send(results[0].pok_a)
+            res.json({
+                message:"Success",
+                value:results[0].pok_a
+            })
                 break;
             case 'b':
-            res.send(results[0].pok_b)
+            res.json({
+                message:"Success",
+                value:results[0].pok_b
+            })
                 break;
             case 'c':
-            res.send(results[0].pok_c)
+            res.json({
+                message:"Success",
+                value:results[0].pok_c
+            })
                 break;
             case 'd':
-            res.send(results[0].pok_d)
+            res.json({
+                message:"Success",
+                value:results[0].pok_d
+            })
                 break;
             case 's':
-            res.send(results[0].pok_s)
+            res.json({
+                message:"Success",
+                value:results[0].pok_s
+            })
                 break;
         }
     });
