@@ -29,7 +29,12 @@ app.get("/api/pokemon/status/:name/:item", function(req, res, next){
     console.log(req.params.name);
     connection.query('SELECT * FROM `POKEMON_TABLE` WHERE `pok_name` = "'+ req.params.name +'"', function (error, results, fields) {
         if (error) {
-            console.error('error getting: ' + err.stack);
+            console.error('error getting: ' + error.stack);
+            return;
+          }
+          if(!results[0])
+          {
+            console.error('Invalid Name:' + req.params.name);
             return;
           }
         switch(req.params.item) {
