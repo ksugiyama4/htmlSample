@@ -49,8 +49,8 @@ app.get("/api/pokemon/status/:name", function(req, res, next){
                 pok_a:results[0].pok_a,
                 pok_b:results[0].pok_b,
                 pok_c:results[0].pok_c,
-                pok_d:results[0].pok_d,
-                pok_s:results[0].pok_s
+                pok_d:results[0].pok_s,
+                pok_s:results[0].pok_d
             })
     });
 });
